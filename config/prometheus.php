@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'collect_full_sql_query' => env('PYR_COLLECT_FULL_SQL_QUERY', true),
+    'collect_full_sql_query' => env('PYR_COLLECT_FULL_SQL_QUERY', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -95,10 +95,10 @@ return [
     */
 
     'collectors' => [
-        // \Your\ExporterClass::class,
+        \Beat\Pyr\QueryCollector::class,
+        \Beat\Pyr\GuzzleCollector::class,
+        \Beat\Pyr\RequestCollector::class,
     ],
 
-    'default_metric_labels' => [
-        //Set your default env vars labels here
-    ]
+    'ignore_paths' => [ ]
 ];
