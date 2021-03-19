@@ -11,15 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MetricsController extends Controller
 {
-    /**
-     * @var ResponseFactory
-     */
-    protected $responseFactory;
-
-    /**
-     * @var PrometheusExporter
-     */
-    protected $prometheusExporter;
+    protected ResponseFactory $responseFactory;
+    protected PrometheusExporter $prometheusExporter;
 
     /**
      * @param ResponseFactory    $responseFactory

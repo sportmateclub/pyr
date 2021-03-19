@@ -12,14 +12,8 @@ class GuzzleMiddleware
 {
     const NO_ROUTE = 'Undefined';
 
-    /**
-     * @var Histogram
-     */
-    private $histogram;
+    private Histogram $histogram;
 
-    /**
-     * @param Histogram $histogram
-     */
     public function __construct(Histogram $histogram)
     {
         $this->histogram = $histogram;
@@ -39,7 +33,7 @@ class GuzzleMiddleware
             $start = microtime(true);
             return $handler($request, $options)->then(
                 function (Response $response) use ($request, $start, $options) {
-                    $path = !empty($options['actionURI']) ? $options['actionURI'] : self::NO_ROUTE;
+                    $path = $options['action_uri'] ?? self::NO_ROUTE;
 
                     $this->histogram->observe(
                         microtime(true) - $start,

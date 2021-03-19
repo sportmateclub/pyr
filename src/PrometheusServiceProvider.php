@@ -21,10 +21,13 @@ class PrometheusServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/prometheus.php' => $this->configPath('prometheus.php'),
         ]);
+
         $this->loadRoutes();
+
         /* @var PrometheusExporter $exporter */
         $exporter = $this->app->make(PrometheusExporter::class);
-        foreach (config('prometheus.collectors') as $class) {
+
+        foreach (config('prometheus.collectors', []) as $class) {
             $collector = $this->app->make($class);
             $exporter->registerCollector($collector);
         }
@@ -39,9 +42,7 @@ class PrometheusServiceProvider extends ServiceProvider
 
         $this->app->singleton(PrometheusExporter::class, function ($app) {
             $adapter = $app['prometheus.storage_adapter'];
-            $defaultMetricLabels = config('prometheus.default_metric_labels');
             $prometheus = new CollectorRegistry($adapter);
-            $prometheus->applyDefaultLabels($defaultMetricLabels);
 
             return new PrometheusExporter(config('prometheus.namespace'), $prometheus);
         });
@@ -86,21 +87,10 @@ class PrometheusServiceProvider extends ServiceProvider
         $router = $this->app['router'];
 
         /** @var Route $route */
-        $isLumen = Str::contains($this->app->version(), 'Lumen');
-        if ($isLumen) {
-            $router->get(
-                config('prometheus.metrics_route_path'),
-                [
-                    'as' => 'metrics',
-                    'uses' => MetricsController::class . '@getMetrics',
-                ]
-            );
-        } else {
-            $router->get(
-                config('prometheus.metrics_route_path'),
-                MetricsController::class . '@getMetrics'
-            )->name('metrics');
-        }
+        $router->get(
+            config('prometheus.metrics_route_path'),
+            MetricsController::class . '@getMetrics'
+        )->name('metrics');
     }
 
     private function configPath($path) : string
