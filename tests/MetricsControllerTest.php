@@ -9,7 +9,7 @@ use Illuminate\Http\Response;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use Prometheus\RenderTextFormat;
-use Beat\Pyr\MetricsController;
+use Beat\Pyr\Http\MetricsController;
 use Beat\Pyr\PrometheusExporter;
 
 /**

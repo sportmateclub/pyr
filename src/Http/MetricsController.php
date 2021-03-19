@@ -2,8 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Beat\Pyr;
+namespace Beat\Pyr\Http;
 
+use Beat\Pyr\PrometheusExporter;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Routing\Controller;
 use Prometheus\RenderTextFormat;
@@ -22,6 +23,8 @@ class MetricsController extends Controller
     {
         $this->responseFactory = $responseFactory;
         $this->prometheusExporter = $prometheusExporter;
+
+        $this->middleware(IpWhitelistMiddleware::class);
     }
 
     /**

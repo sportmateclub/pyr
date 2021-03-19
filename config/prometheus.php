@@ -100,5 +100,7 @@ return [
         \Beat\Pyr\RequestCollector::class,
     ],
 
-    'ignore_paths' => [ ]
+    'ignore_paths' => [ ],
+
+    'allowed_ips' => [ ],
 ];

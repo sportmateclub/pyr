@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Beat\Pyr;
 
+use Beat\Pyr\Http\MetricsController;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
