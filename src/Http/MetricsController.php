@@ -30,7 +30,7 @@ class MetricsController extends Controller
     /**
      * GET /metrics
      *
-     * The route path is configurable in the prometheus.metrics_route_path config var, or the
+     * The route path is configurable in the pyr.metrics_route_path config var, or the
      * PYR_METRICS_ROUTE_PATH env var.
      *
      * @return Response

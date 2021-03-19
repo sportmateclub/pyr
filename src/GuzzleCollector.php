@@ -25,7 +25,7 @@ class GuzzleCollector implements CollectorInterface
         $stack->push(new GuzzleMiddleware($histogram));
 
         // @TODO: how to expose this guzzle client?
-//        return new Client(['handler' => $app['prometheus.guzzle.handler-stack']]);
+//        return new Client(['handler' => $app['pyr.guzzle.handler-stack']]);
     }
 
     public function collect(): void

@@ -10,7 +10,7 @@ class IpWhitelistMiddleware
 {
     public function handle(Request $request, \Closure $next): Response
     {
-        $ipWhitelist = config('prometheus.allowed_ips');
+        $ipWhitelist = config('pyr.allowed_ips');
         if (empty($ipWhitelist)) {
             return $next($request);
         }

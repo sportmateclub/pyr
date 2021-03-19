@@ -32,7 +32,7 @@ class RequestCollector implements CollectorInterface
             'horizon*',
             'vendor/horizon*',
             '_tt*',
-            config('prometheus.metrics_route_path').'*',
+            config('pyr.metrics_route_path').'*',
         ], config('telescope.ignore_paths', []));
     }
 
@@ -55,7 +55,7 @@ class RequestCollector implements CollectorInterface
             }
 
             $startTime = defined('LARAVEL_START') ? LARAVEL_START : $event->request->server('REQUEST_TIME_FLOAT');
-            $duration = $startTime ? floor((microtime(true) - $startTime) * 1000) : null;
+            $duration = $startTime ? floor((microtime(true) - $startTime) * 1000) : 0;
 
             $histogram->observe(
                 $duration,
